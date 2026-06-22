@@ -1,0 +1,6 @@
+streamlit>=1.32.0
+supabase>=2.0.0
+plotly>=5.18.0
+pandas>=2.0.0
+apscheduler>=3.10.0
+resend>=0.7.0
