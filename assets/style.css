@@ -1,0 +1,452 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Melshape — Design System
+   Todas as cores via variáveis CSS. Dark mode via [data-theme="dark"].
+   NUNCA usar cores hex direto em componentes — usar var(--nome).
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── TOKENS: MODO CLARO ─────────────────────────────────────────────────── */
+:root {
+  /* Marca */
+  --primary:        #C9A84C;
+  --primary-dark:   #a8862e;
+  --primary-light:  rgba(201, 168, 76, 0.12);
+  --primary-border: rgba(201, 168, 76, 0.35);
+
+  /* Superfícies */
+  --bg:             #F8F7F4;
+  --surface:        #FFFFFF;
+  --surface-2:      #F1F0ED;
+  --border:         #E2E1DE;
+  --border-subtle:  rgba(0, 0, 0, 0.06);
+
+  /* Texto */
+  --text:           #1C1C1E;
+  --text-muted:     #6B6B6B;
+  --text-faint:     #9CA3AF;
+
+  /* Semânticas */
+  --success:        #16A34A;
+  --success-bg:     rgba(22, 163, 74, 0.10);
+  --warning:        #D97706;
+  --warning-bg:     rgba(217, 119, 6, 0.10);
+  --error:          #DC2626;
+  --error-bg:       rgba(220, 38, 38, 0.10);
+  --info:           #2563EB;
+  --info-bg:        rgba(37, 99, 235, 0.10);
+
+  /* Pilares */
+  --pilar-geral:      #6366F1;
+  --pilar-fitness:    #0EA5E9;
+  --pilar-bariatric:  #8B5CF6;
+  --pilar-glp1:       #10B981;
+
+  /* Raios e sombras */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  20px;
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md:  0 4px 12px rgba(0,0,0,0.10);
+
+  /* Tipografia */
+  --font-display: 'Sora', sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+}
+
+/* ── TOKENS: MODO ESCURO ─────────────────────────────────────────────────── */
+[data-theme="dark"] {
+  --bg:             #0F0F12;
+  --surface:        #1A1A22;
+  --surface-2:      #22222C;
+  --border:         #2E2E3A;
+  --border-subtle:  rgba(255, 255, 255, 0.06);
+
+  --text:           #F0EFE8;
+  --text-muted:     #A0A0B0;
+  --text-faint:     #6B6B7B;
+
+  --success-bg:     rgba(22, 163, 74, 0.15);
+  --warning-bg:     rgba(217, 119, 6, 0.15);
+  --error-bg:       rgba(220, 38, 38, 0.15);
+  --info-bg:        rgba(37, 99, 235, 0.15);
+  --primary-light:  rgba(201, 168, 76, 0.15);
+  --shadow-sm:      0 1px 3px rgba(0,0,0,0.30);
+  --shadow-md:      0 4px 12px rgba(0,0,0,0.40);
+}
+
+/* ── RESET STREAMLIT ─────────────────────────────────────────────────────── */
+.stApp {
+  background-color: var(--bg) !important;
+  font-family: var(--font-body) !important;
+  color: var(--text) !important;
+}
+section[data-testid="stSidebar"] {
+  background-color: var(--surface) !important;
+  border-right: 1px solid var(--border) !important;
+}
+.stMarkdown, .stText { color: var(--text) !important; }
+h1, h2, h3, h4 {
+  font-family: var(--font-display) !important;
+  color: var(--text) !important;
+}
+
+/* ── METRIC CARD ─────────────────────────────────────────────────────────── */
+.metric-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.1rem 1.2rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.metric-value {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+}
+.metric-value.success { color: var(--success); }
+.metric-value.warning { color: var(--warning); }
+.metric-value.error   { color: var(--error);   }
+.metric-label {
+  font-size: 0.80rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  font-weight: 500;
+}
+
+/* ── PROGRESS BAR ────────────────────────────────────────────────────────── */
+.progress-wrap { margin: 0.5rem 0; }
+.progress-track {
+  background: var(--surface-2);
+  border-radius: 9999px;
+  height: 8px;
+  overflow: hidden;
+}
+.progress-fill {
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.5s ease;
+}
+.progress-fill.warning { background: linear-gradient(90deg, var(--warning), #b45309); }
+.progress-fill.danger  { background: linear-gradient(90deg, var(--error),   #991b1b); }
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+/* ── ALERTAS ─────────────────────────────────────────────────────────────── */
+.alert-warning, .alert-error, .alert-success, .alert-info {
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  font-size: 0.86rem;
+  margin: 0.5rem 0;
+  border-left: 3px solid;
+}
+.alert-warning {
+  background: var(--warning-bg);
+  border-color: var(--warning);
+  color: var(--warning);
+}
+.alert-error {
+  background: var(--error-bg);
+  border-color: var(--error);
+  color: var(--error);
+}
+.alert-success {
+  background: var(--success-bg);
+  border-color: var(--success);
+  color: var(--success);
+}
+.alert-info {
+  background: var(--info-bg);
+  border-color: var(--info);
+  color: var(--info);
+}
+
+/* ── CARDS GERAIS ────────────────────────────────────────────────────────── */
+.feature-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.3rem;
+  text-align: center;
+  transition: border-color 0.2s ease;
+}
+.feature-card:hover { border-color: var(--primary-border); }
+.feature-card .icon { font-size: 2rem; }
+.feature-card h3 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0.5rem 0 0.3rem;
+}
+.feature-card p {
+  font-size: 0.80rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ── REFEIÇÕES ───────────────────────────────────────────────────────────── */
+.meal-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  transition: border-color 0.15s;
+}
+.meal-item:hover { border-color: var(--primary-border); }
+.meal-name  { font-weight: 600; font-size: 0.92rem; color: var(--text); }
+.meal-time  { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.1rem; }
+.meal-score { font-size: 0.72rem; color: var(--primary); margin-top: 0.15rem; }
+.meal-cal   { font-weight: 700; color: var(--primary); font-size: 0.95rem; }
+
+/* ── GAMIFICAÇÃO ─────────────────────────────────────────────────────────── */
+.achievement-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, var(--primary-light), var(--surface));
+  border: 1px solid var(--primary-border);
+  border-radius: var(--radius-md);
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.4rem;
+}
+.achievement-card .medal { font-size: 1.5rem; }
+.achievement-card .title { font-weight: 600; font-size: 0.90rem; color: var(--text); }
+
+.challenge-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.4rem;
+}
+.challenge-title { font-size: 0.88rem; color: var(--text); }
+.xp-badge {
+  background: var(--primary-light);
+  color: var(--primary);
+  border: 1px solid var(--primary-border);
+  border-radius: 9999px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.level-badge {
+  background: var(--primary-light);
+  border: 1px solid var(--primary-border);
+  border-radius: 9999px;
+  padding: 0.25rem 0.8rem;
+  font-size: 0.80rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* ── PILARES / MODO DE SAÚDE ─────────────────────────────────────────────── */
+.mode-badge {
+  display: inline-block;
+  border-radius: 9999px;
+  padding: 0.2rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1px solid;
+}
+.mode-general   { background: rgba(99,102,241,.12);  border-color: rgba(99,102,241,.35);  color: var(--pilar-geral); }
+.mode-fitness   { background: rgba(14,165,233,.12);  border-color: rgba(14,165,233,.35);  color: var(--pilar-fitness); }
+.mode-bariatric { background: rgba(139,92,246,.12);  border-color: rgba(139,92,246,.35);  color: var(--pilar-bariatric); }
+.mode-glp1      { background: rgba(16,185,129,.12);  border-color: rgba(16,185,129,.35);  color: var(--pilar-glp1); }
+
+/* ── PLANOS ──────────────────────────────────────────────────────────────── */
+.plan-trial, .plan-free, .plan-essencial, .plan-pro, .plan-lifetime {
+  display: inline-block;
+  border-radius: 9999px;
+  padding: 0.18rem 0.7rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  border: 1px solid;
+}
+.plan-trial    { background: rgba(217,119,6,.12);   border-color: rgba(217,119,6,.35);   color: var(--warning); }
+.plan-free     { background: var(--surface-2);      border-color: var(--border);          color: var(--text-muted); }
+.plan-essencial{ background: var(--info-bg);        border-color: rgba(37,99,235,.35);    color: var(--info); }
+.plan-pro      { background: var(--primary-light);  border-color: var(--primary-border);  color: var(--primary); }
+.plan-lifetime { background: rgba(139,92,246,.12);  border-color: rgba(139,92,246,.35);   color: var(--pilar-bariatric); }
+
+/* ── HIDRATAÇÃO ──────────────────────────────────────────────────────────── */
+.hydration-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--info-bg);
+  border: 1px solid rgba(37, 99, 235, 0.20);
+  border-radius: var(--radius-md);
+  padding: 0.6rem 0.9rem;
+  margin: 0.4rem 0;
+}
+.hydration-drops { font-size: 1rem; letter-spacing: -2px; }
+.hydration-text  { font-size: 0.82rem; color: var(--info); font-weight: 600; }
+
+/* ── EMPTY STATE ─────────────────────────────────────────────────────────── */
+.empty-state {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--text-muted);
+}
+.empty-icon { font-size: 2.8rem; margin-bottom: 0.6rem; }
+.empty-msg  { font-size: 1rem; font-weight: 600; color: var(--text); margin: 0.3rem 0; }
+.empty-hint { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
+
+/* ── QUOTE CARD ──────────────────────────────────────────────────────────── */
+.quote-card {
+  background: var(--primary-light);
+  border-left: 3px solid var(--primary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 0.85rem 1.1rem;
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin: 0.6rem 0;
+}
+
+/* ── DISCLAIMER MÉDICO ───────────────────────────────────────────────────── */
+.medical-disclaimer {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 1rem;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  margin: 0.8rem 0;
+  text-align: center;
+}
+
+/* ── SIDEBAR LOGO ────────────────────────────────────────────────────────── */
+.sidebar-logo {
+  text-align: center;
+  padding: 1.2rem 0 1rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.8rem;
+}
+.sidebar-logo-name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--primary);
+  letter-spacing: -0.5px;
+}
+.sidebar-logo-tag {
+  font-size: 0.68rem;
+  color: var(--text-faint);
+  margin-top: 0.1rem;
+}
+
+/* ── BOTÃO FLUTUANTE "+" ─────────────────────────────────────────────────── */
+.fab {
+  position: fixed;
+  bottom: 1.8rem;
+  right: 1.8rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(201, 168, 76, 0.40);
+  cursor: pointer;
+  z-index: 999;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.fab:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(201, 168, 76, 0.55);
+}
+
+/* ── ANIMAÇÕES ───────────────────────────────────────────────────────────── */
+.fade-in      { animation: fadeIn 0.35s ease forwards; }
+.fade-in-fast { animation: fadeIn 0.18s ease forwards; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── TOGGLE DARK MODE ────────────────────────────────────────────────────── */
+.dark-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.80rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+}
+.dark-toggle:hover { background: var(--surface-2); }
+
+/* ── STREAMLIT OVERRIDES ─────────────────────────────────────────────────── */
+div[data-testid="stButton"] > button[kind="primary"] {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
+  border: none !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  border-radius: var(--radius-md) !important;
+}
+div[data-testid="stButton"] > button[kind="secondary"] {
+  background: transparent !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text) !important;
+  border-radius: var(--radius-md) !important;
+}
+div[data-testid="stButton"] > button[kind="secondary"]:hover {
+  border-color: var(--primary-border) !important;
+  color: var(--primary) !important;
+}
+.stTextInput > div > div > input,
+.stSelectbox > div > div,
+.stNumberInput > div > div > input {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+  color: var(--text) !important;
+  border-radius: var(--radius-md) !important;
+}
+.stTextInput > div > div > input:focus,
+.stSelectbox > div > div:focus-within {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 2px var(--primary-light) !important;
+}
+div[data-testid="stMetric"] {
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: 0.9rem 1rem !important;
+}
+div[data-testid="stMetric"] label {
+  color: var(--text-muted) !important;
+  font-size: 0.82rem !important;
+}
+div[data-testid="stMetric"] [data-testid="stMetricValue"] {
+  color: var(--text) !important;
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+}
